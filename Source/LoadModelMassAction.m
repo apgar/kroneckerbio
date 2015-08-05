@@ -326,8 +326,12 @@ for iFile = 1:nFiles
                 name = tokens{1};
                 
                 % Second token is value
-                value = eval(tokens{2});
-                
+                try
+                    value = eval(tokens{2});
+                catch e
+                    error('KroneckerBio:LoadModelMassAction:InvalidValue', ...
+                        'parameter "%s" with value "%s" is not a valid parameter value', name, tokens{2});
+                end
                 % Add parameter
                 m = AddParameter(m, name, value);
             elseif mode == 7
