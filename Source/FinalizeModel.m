@@ -95,7 +95,7 @@ m.Inputs = [m.Inputs; m.add.Inputs(1:nuNew)];
 nu = numel(m.Inputs);
 m.nu = nu;
 uNamesFull = [existing_full_names; new_full_names];
-m.vuInd = lookup(vec({m.Inputs.Compartment}), vNames);
+m.vuInd = kblookup(vec({m.Inputs.Compartment}), vNames);
 
 %% Place states
 nxNew = m.add.nx;
@@ -122,7 +122,7 @@ m.States = [m.States; m.add.States(1:nxNew)];
 nx = numel(m.States);
 xNamesFull = [existing_full_names; new_full_names];
 m.nx = nx;
-m.vxInd = lookup(vec({m.States.Compartment}), vNames);
+m.vxInd = kblookup(vec({m.States.Compartment}), vNames);
 
 %% Place outputs
 nyNew = m.add.ny;
@@ -191,7 +191,7 @@ for ir = 1:nrNew
             full_reactant_names{iReac} = incomplete_name;
         else
             potential_full_names = strcat(possible_comp, '.', incomplete_name);
-            species_index = lookup(xuNamesFull, potential_full_names);
+            species_index = kblookup(xuNamesFull, potential_full_names);
             
             if nnz(species_index) < 1
                 error('KroneckerBio:FinalizeModel:ReactantNotFound', 'Reaction %s (#%i) has reactant %s (#%i), which was not found as a species', m.add.Reactions(ir).Name, ir, incomplete_name, iReac)
@@ -213,7 +213,7 @@ for ir = 1:nrNew
             full_product_names{iProd} = incomplete_name;
         else
             potential_full_names = strcat(possible_comp, '.', incomplete_name);
-            species_index = lookup(xuNamesFull, potential_full_names);
+            species_index = kblookup(xuNamesFull, potential_full_names);
             
             if nnz(species_index) < 1
                 error('KroneckerBio:FinalizeModel:ProductNotFound', 'Reaction %s (#%i) has product %s (#%i), which was not found as a species', m.add.Reactions(ir).Name, ir, incomplete_name, iProd)

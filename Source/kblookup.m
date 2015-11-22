@@ -1,4 +1,4 @@
-function ind = lookup(x, d)
+function ind = kblookup(x, d)
 %LOOKUP Map a vector onto a dictionary
 %
 %   I = LOOKUP(X, D)
